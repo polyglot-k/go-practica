@@ -1,0 +1,27 @@
+# Gemini Code Assist - Go 학습용 Repo Config
+
+have_fun: true
+
+ignore_patterns:
+    - "**/vendor/**" # Go 의존성 디렉토리 제외
+    - "**/bin/**" # 빌드 산출물 제외
+    - "**/*.log" # 로그 파일 제외
+    - "**/tmp/**"
+
+memory_config:
+    disabled: false # 학습 히스토리 유지해서 점점 개선된 피드백 받기
+
+code_review:
+    disable: false
+
+    # Go 초보 단계에서는 MEDIUM 이상부터 피드백 받는 게 좋음
+    comment_severity_threshold: MEDIUM
+
+    # 학습 목적이니 리뷰 코멘트 제한 없이
+    max_review_comments: -1
+
+    pull_request_opened:
+        help: true # PR 열 때 가이드 메시지
+        summary: true # 변경 요약
+        code_review: true # 코드 리뷰 자동 실행
+        include_drafts: true # Draft 상태여도 리뷰
