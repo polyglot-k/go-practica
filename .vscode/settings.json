@@ -1,0 +1,7 @@
+{
+    "github.copilot.enable": {
+        "*": false,
+        "go": false,
+        "java": false
+    }
+}
