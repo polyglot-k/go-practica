@@ -12,12 +12,21 @@ func main() {
 	var startPort, endPort int
 	var timeoutMs int
 
-	fmt.Print("대상 호스트: ")
-	fmt.Scanln(&host)
-	fmt.Print("포트 범위(시작 끝): ")
-	fmt.Scanln(&startPort, &endPort)
-	fmt.Print("타임아웃(ms): ")
-	fmt.Scanln(&timeoutMs)
+    fmt.Print("대상 호스트: ")
+    if _, err := fmt.Scanln(&host); err != nil {
+        fmt.Println("잘못된 호스트 입력:", err)
+        return
+    }
+    fmt.Print("포트 범위(시작 끝): ")
+    if _, err := fmt.Scanln(&startPort, &endPort); err != nil {
+        fmt.Println("잘못된 포트 범위 입력:", err)
+        return
+    }
+    fmt.Print("타임아웃(ms): ")
+    if _, err := fmt.Scanln(&timeoutMs); err != nil {
+        fmt.Println("잘못된 타임아웃 입력:", err)
+        return
+    }
 
 	timeout := time.Duration(timeoutMs) * time.Millisecond
 	openPorts := []int{}
