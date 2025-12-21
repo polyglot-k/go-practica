@@ -3,6 +3,7 @@ package main
 import (
 	"fmt"
 	"log"
+	"os"
 
 	calc "github.com/polyglot-k/go-practica/calculator/internal"
 )
@@ -14,22 +15,30 @@ func main() {
 	)
 
 	fmt.Print("operand1: ")
-	fmt.Scan(&a)
-
+	if _, err := fmt.Scan(&a); err != nil {
+		log.Fatalf("error: invalid operand1: %v", err)
+	}
+	
 	fmt.Print("operand2: ")
-	fmt.Scan(&b)
+	if _, err := fmt.Scan(&b); err != nil {
+		log.Fatalf("error: invalid operand12: %v", err)
+	}
 
 	fmt.Print("operator (+ - * /): ")
-	fmt.Scan(&op)
+	if _, err := fmt.Scan(&op); err != nil {
+		log.Fatalf("error: invalid operator: %v", err)
+	}
 
 	operator, err := calc.ParseOperator(op)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
 	}
 
 	result, err := calc.Calculate(calc.Operand(a), calc.Operand(b), operator)
 	if err != nil {
-		log.Fatal(err)
+		fmt.Fprintf(os.Stderr, "error: %v\n", err)
+		os.Exit(1)
 	}
 
 	fmt.Println("result:", result)
